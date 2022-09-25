@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/weather.js" defer></script>
+    <title>Get Weather</title>
+</head>
+<body>
+    <h1>feasibility check - Teambits</h1>
+
+    <div>
+        <label for="cityName"><b>Input city</b></label>
+        <input type="text" id="cityName">
+        <button id="citySearch">Select</button>
+    </div>
+    <button id="getWeather">Get weather</button>
+    <button id="forecast">Weather Forecast</button>
+
+    <h2>Display Current Location Info</h2>
+    <ul>
+        <li>Latitude : <span id="latitude"></span></li>
+        <li>Longitude : <span id="longitude"></span></li>
+        <div id="locationError"></div>
+    </ul>
+
+    <h2>Display Weather Info<span id="locationWeather"></span></h2>
+    <ul>
+        <li>Temperature : <span id="temperature"></span></li>
+        <li>Weather : <span id="weather"></span></li>
+        <li>Latitude : <span id="WeatherLatitude"></span></li>
+        <li>Longitude : <span id="WeatherLongitude"></span></li>
+        <div id="locationError"></div>
+    </ul>
+
+    <div id=userFeedback>
+        <h2>5 Days Weather Forecast<span id="locationForecast"></span></h2>
+        <table id="fiveDaysWeatherTable">
+        </table>
+    </div>
+</body>
+</html>
