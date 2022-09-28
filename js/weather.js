@@ -46,7 +46,7 @@ getWeather.addEventListener('click', () => {
     // console.log("lat : " + lat + "lon : " + lon);
 
     fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`,
+        `https://pro.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`,
      )
         .then(response => response.json())
         .then(data => {
@@ -60,7 +60,7 @@ getWeather.addEventListener('click', () => {
 
 citySearch.addEventListener('click', () => {
     fetch(
-        `https://api.openweathermap.org/geo/1.0/direct?q=${cityName.value}&appid=${API_KEY}`,
+        `https://pro.openweathermap.org/geo/1.0/direct?q=${cityName.value}&appid=${API_KEY}`,
     )
         .then(response => response.json())
         .then(data => {
@@ -72,7 +72,7 @@ citySearch.addEventListener('click', () => {
                 console.log(SettedLocation);
                 locationWeather.innerHTML = "";
                 locationForecast.innerHTML = "";
-                fiveDaysWeatherTable.innerHTML = "";
+                thirtyDaysWeatherTable.innerHTML = "";
             } else {
                 console.log("No city");
             }
@@ -81,33 +81,35 @@ citySearch.addEventListener('click', () => {
 
 forecast.addEventListener('click', () => {
     fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`,
+        `https://pro.openweathermap.org/data/2.5/forecast/climate?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`,
      )
         .then(response => response.json())
         .then(data => {
             // whole data is displayed console.log, instead access below link to show whole data
-            // https://api.openweathermap.org/data/2.5/forecast?lat=49.2288149&lon=-123.1141329&appid=030a06ef3a21f98e9fad039e0133fbbe
+            // https://api.openweathermap.org/data/2.5/forecast/climate?lat=49.2288149&lon=-123.1141329&appid=030a06ef3a21f98e9fad039e0133fbbe
             // console.log(JSON.stringify(data));
             let list = data.list;
             locationForecast.innerHTML = " : " + SettedLocation;
-            fiveDaysWeatherTable.innerHTML = "";
+            thirtyDaysWeatherTable.innerHTML = "";
             for (item of list) {
                 // console.log("forecast weather date : " + item.dt_txt);
                 // console.log("forecast weather data : " + item.weather[0].main);
                 let symbol = item.weather[0].icon + ".png";
                 let imageSrcUrl = IMAGE_BASE + symbol;
-                let row = fiveDaysWeatherTable.insertRow();
+                let row = thirtyDaysWeatherTable.insertRow();
 
                 // define cells each rows.
                 const cellDate = row.insertCell(0);
                 const cellWeatherIcon = row.insertCell(1);
                 const cellWeather = row.insertCell(2);
-                const cellTemp = row.insertCell(3);
+                const cellTempMin = row.insertCell(3);
+                const cellTempMax = row.insertCell(4);
 
-                cellDate.innerHTML = item.dt_txt;
+                cellDate.innerHTML = new Date(parseInt(item.dt + "000")).toDateString();
                 cellWeatherIcon.innerHTML = `<img src=${imageSrcUrl}>`;
                 cellWeather.innerHTML = item.weather[0].main;
-                cellTemp.innerHTML = item.main.temp + "℃";
+                cellTempMin.innerHTML = item.temp.min + "℃ |";
+                cellTempMax.innerHTML = item.temp.max + "℃";
             }
         });
 });
