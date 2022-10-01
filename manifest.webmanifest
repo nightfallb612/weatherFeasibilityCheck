@@ -1,0 +1,17 @@
+{
+  "name": "Wear This",
+  "short_name": "WearThis",
+  "icons": [{
+    "src": "icons/icon-192x192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }, {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+  }],
+  "start_url": "/index.html",
+  "display": "fullscreen",
+  "theme_color": "aliceblue",
+  "background_color": "red"
+}
